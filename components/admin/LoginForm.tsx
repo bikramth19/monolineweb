@@ -1,0 +1,8 @@
+'use client';
+import {FormEvent,useState} from 'react';
+import {useRouter} from 'next/navigation';
+export function LoginForm(){
+  const router=useRouter();const [email,setEmail]=useState(''),[password,setPassword]=useState(''),[error,setError]=useState(''),[loading,setLoading]=useState(false);
+  async function submit(e:FormEvent){e.preventDefault();setLoading(true);setError('');try{const r=await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});const data=await r.json();if(!r.ok)throw Error(data.error||'Login failed');router.push('/admin');router.refresh();}catch(e){setError((e as Error).message);}finally{setLoading(false);}}
+  return <div className="admin-login"><form className="admin-login-card" onSubmit={submit}><img src="/images/monoline-logo.png" alt="Monoline logo"/><h1>Welcome Back</h1><p>Sign in to manage Monoline website content.</p>{error&&<div className="admin-alert">{error}</div>}<label htmlFor="adminEmail">Email Address</label><input className="form-control" id="adminEmail" type="email" value={email} onChange={e=>setEmail(e.target.value)} required autoComplete="username"/><label htmlFor="adminPassword">Password</label><input className="form-control" id="adminPassword" type="password" value={password} onChange={e=>setPassword(e.target.value)} required autoComplete="current-password"/><button disabled={loading} className="admin-primary" type="submit">{loading?'Signing In…':'Sign In to Dashboard →'}</button><p className="mt-4 mb-0" style={{fontSize:11}}>Admin access only · Passwords are never stored in plain text</p></form></div>;
+}

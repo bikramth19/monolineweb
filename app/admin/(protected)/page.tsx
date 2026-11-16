@@ -1,0 +1,13 @@
+import Link from 'next/link';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faFileLines,faNewspaper,faPhotoFilm,faImages,faArrowRight,faGear} from '@fortawesome/free-solid-svg-icons';
+import {prisma} from '@/lib/prisma';
+export const dynamic='force-dynamic';
+export default async function Dashboard(){
+  const [pageCount,postCount,bannerCount,mediaCount,recent]=await Promise.all([
+    prisma.page.count(),prisma.post.count(),prisma.banner.count(),prisma.media.count(),
+    prisma.post.findMany({orderBy:{updatedAt:'desc'},take:5,select:{id:true,title:true,status:true,updatedAt:true}})
+  ]);
+  const cards=[['Pages',pageCount,faFileLines,'/admin/pages'],['Blog Posts',postCount,faNewspaper,'/admin/posts'],['Banners',bannerCount,faPhotoFilm,'/admin/banners'],['Media Files',mediaCount,faImages,'/admin/media']] as const;
+  return <><div className="admin-page-head"><div><h2>Good to see you 👋</h2><p>Here's a quick overview of your Monoline website content.</p></div><Link className="admin-primary" href="/admin/pages">Manage Pages <FontAwesomeIcon icon={faArrowRight}/></Link></div><div className="admin-stat-grid">{cards.map(([title,count,icon,href])=><Link href={href} className="admin-stat admin-card" key={title}><FontAwesomeIcon icon={icon}/><strong>{count}</strong><span>{title}</span><div className="admin-stat-foot">View & manage →</div></Link>)}</div><div className="admin-columns"><section className="admin-card"><div className="admin-card-title">Recent Blog Activity</div>{recent.length?recent.map(p=><div className="admin-shortcut" key={p.id}><span><b>{p.title}</b><small className="d-block text-muted">{p.status} · {p.updatedAt.toLocaleDateString('en-IN')}</small></span><Link href="/admin/posts" className="text-success">Manage →</Link></div>):<p className="text-muted p-4">No blog posts yet. Add your first article.</p>}</section><section className="admin-card"><div className="admin-card-title">Quick Actions</div>{[['Add or Edit Pages','/admin/pages',faFileLines],['Publish a Blog Post','/admin/posts',faNewspaper],['Manage Homepage Banners','/admin/banners',faPhotoFilm],['Upload & Choose Media','/admin/media',faImages],['Update Branding & Footer','/admin/settings',faGear]].map(([name,href,icon])=><Link href={href as string} className="admin-shortcut" key={name as string}><span><FontAwesomeIcon icon={icon as typeof faFileLines} className="me-2 text-success"/>{name as string}</span><FontAwesomeIcon icon={faArrowRight}/></Link>)}</section></div></>;
+}

@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique @db.VarChar(190)
+  passwordHash String   @db.VarChar(255)
+  name         String   @default("Administrator") @db.VarChar(190)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+model Page {
+  id          String   @id @default(cuid())
+  title       String   @db.VarChar(190)
+  slug        String   @unique @db.VarChar(190)
+  excerpt     String?  @db.Text
+  content     String   @db.LongText
+  seoTitle    String?  @db.VarChar(190)
+  seoDesc     String?  @db.Text
+  coverImage  String?  @db.VarChar(500)
+  status      String   @default("draft") @db.VarChar(20)
+  showInNav   Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+model Post {
+  id          String    @id @default(cuid())
+  title       String    @db.VarChar(190)
+  slug        String    @unique @db.VarChar(190)
+  category    String    @default("Insights") @db.VarChar(100)
+  excerpt     String?   @db.Text
+  content     String    @db.LongText
+  coverImage  String?   @db.VarChar(500)
+  status      String    @default("draft") @db.VarChar(20)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+model Banner {
+  id         String   @id @default(cuid())
+  headline   String   @db.VarChar(255)
+  subheading String?  @db.Text
+  imageUrl   String   @db.VarChar(500)
+  buttonText String?  @db.VarChar(90)
+  buttonHref String?  @db.VarChar(255)
+  isActive   Boolean  @default(true)
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+model Media {
+  id          String   @id @default(cuid())
+  fileName    String   @db.VarChar(255)
+  url         String   @db.VarChar(500)
+  mimeType    String   @db.VarChar(90)
+  size        Int
+  altText     String?  @db.VarChar(255)
+  createdAt   DateTime @default(now())
+}
+model SiteSettings {
+  id             Int      @id @default(1)
+  brandName      String   @default("Monoline") @db.VarChar(190)
+  tagline        String   @default("Accounting · Compliance · Advisory") @db.VarChar(255)
+  logoUrl        String?  @db.VarChar(500)
+  faviconUrl     String?  @db.VarChar(500)
+  email          String?  @db.VarChar(190)
+  phone          String?  @db.VarChar(90)
+  phoneSecondary String?  @db.VarChar(90)
+  address        String?  @db.Text
+  mapsEmbedUrl   String?  @db.VarChar(1000)
+  mapsLink       String?  @db.VarChar(1000)
+  copyrightText  String   @default("© Monoline. All rights reserved.") @db.VarChar(255)
+  developedBy    String?  @db.VarChar(190)
+  developedByUrl String?  @db.VarChar(500)
+  blogLayout     String   @default("grid") @db.VarChar(20)
+  updatedAt      DateTime @updatedAt
+}
