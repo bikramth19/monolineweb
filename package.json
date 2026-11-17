@@ -2,64 +2,48 @@
   "name": "monoline-next-cms",
   "version": "1.0.0",
   "private": true,
-
   "scripts": {
     "predev": "prisma generate --schema prisma/neon/schema.prisma",
-
     "dev": "next dev -p 3000",
-
     "build": "prisma generate --schema prisma/neon/schema.prisma && next build",
-
     "start": "next start -p 3000",
-
     "typecheck": "tsc --noEmit",
-
     "db:generate": "prisma generate --schema prisma/neon/schema.prisma",
-
     "db:push": "prisma db push --schema prisma/neon/schema.prisma",
-
-    "db:seed": "npm run db:generate && node scripts/seed.mjs",
-
+    "db:seed": "npm run db:generate && tsx prisma/seed.ts",
     "db:studio": "prisma studio --schema prisma/neon/schema.prisma",
-
     "content:update": "npm run db:generate && node scripts/update-content.mjs"
   },
-
   "dependencies": {
-    "next": "^16.4.6",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-
-    "@prisma/client": "^6.19.0",
-    "prisma": "^6.19.0",
-
+    "@ckeditor/ckeditor5-react": "^11.0.0",
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.0",
-
+    "@prisma/client": "^6.19.0",
     "@vercel/blob": "^2.9.0",
-
-    "@ckeditor/ckeditor5-react": "^11.0.0",
-    "ckeditor5": "^47.0.0",
-
-    "bootstrap": "^5.3.8",
     "bcryptjs": "^3.0.2",
+    "bootstrap": "^5.3.8",
+    "ckeditor5": "^47.0.0",
+    "dotenv": "^18.0.10",
     "jose": "^6.1.0",
+    "next": "^16.4.6",
+    "prisma": "^6.19.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "sanitize-html": "^2.17.0",
     "sharp": "^0.35.5",
     "slugify": "^1.6.6",
     "zod": "^4.6.6"
   },
-
   "devDependencies": {
-    "typescript": "^5.9.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22.15.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
-    "@types/bcryptjs": "^2.4.6",
-    "@types/sanitize-html": "^2.16.0"
+    "@types/sanitize-html": "^2.16.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.0"
   },
-
   "overrides": {
     "deepmerge-ts": "^8.0.2",
     "postcss": "^8.5.23",
