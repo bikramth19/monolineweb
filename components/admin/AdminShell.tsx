@@ -3,9 +3,9 @@ import Link from 'next/link';
 import {usePathname,useRouter} from 'next/navigation';
 import {useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faChartPie,faFileLines,faNewspaper,faImages,faPhotoFilm,faGear,faArrowRightFromBracket,faGlobe,faBars} from '@fortawesome/free-solid-svg-icons';
+import {faChartPie,faFileLines,faNewspaper,faImages,faPhotoFilm,faGear,faArrowRightFromBracket,faGlobe,faBars,faEnvelope} from '@fortawesome/free-solid-svg-icons';
 
-const links=[['/admin','Dashboard',faChartPie],['/admin/pages','Manage Pages',faFileLines],['/admin/posts','Blog Posts',faNewspaper],['/admin/banners','Banners',faPhotoFilm],['/admin/media','Media Library',faImages],['/admin/settings','Site Settings',faGear]] as const;
+const links=[['/admin','Dashboard',faChartPie],['/admin/pages','Manage Pages',faFileLines],['/admin/posts','Blog Posts',faNewspaper],['/admin/banners','Banners',faPhotoFilm],['/admin/media','Media Library',faImages],['/admin/contact-submissions','Contact Submissions',faEnvelope],['/admin/settings','Site Settings',faGear]] as const;
 export function AdminShell({children,user}:{children:React.ReactNode;user:{name:string;email:string}}){
   const path=usePathname(),router=useRouter(),[menu,setMenu]=useState(false);
   async function logout(){await fetch('/api/auth/logout',{method:'POST'});router.push('/admin/login');router.refresh();}

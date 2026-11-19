@@ -30,4 +30,11 @@ export const settingsSchema = z.object({
   blogLayout: z.enum(['grid','list'])
 });
 export const mediaUpdateSchema = z.object({ altText: nullable(255) });
+export const contactSubmissionSchema = z.object({
+  name: required(190),
+  email: required(190).email('Enter a valid email address.'),
+  phone: text(40).optional(),
+  subject: required(190),
+  message: required(5000)
+});
 export const reservedSlugs = new Set(['admin','api','blog','_next','images','uploads','favicon.ico','robots.txt','sitemap.xml']);

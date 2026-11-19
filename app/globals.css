@@ -72,3 +72,38 @@
 @media(max-width:900px){.content-layout:has(.content-support-panel){grid-template-columns:1fr;gap:34px}.content-support-panel{max-width:none}}
 @media(max-width:600px){.service-catalog-grid{grid-template-columns:1fr}.catalog-contact-cta{display:block;padding:30px 25px}.catalog-contact-cta .site-btn{margin-top:22px}.catalog-card{min-height:235px}.content-support-panel{padding:20px}.about-support-panel{padding:0}}
 @media(prefers-reduced-motion:reduce){.service-card,.step-card,.industry,.blog-card,.service-card .icon-chip,.blog-card img,.card-link svg{animation:none!important;transition:none!important;transform:none!important;will-change:auto}.has-scroll-reveal .reveal-item:not(.is-visible){opacity:1;transform:none}}
+
+/* Keep inner page content aligned with the services catalog. */
+.content-layout:not(:has(.contact-aside)),.article-wrap{max-width:1280px}
+.content-layout:has(.content-support-panel){display:grid}
+.rich-content>div>p:first-child{font-size:16px;line-height:1.9}
+.service-cover{display:block;width:100%;height:340px;object-fit:cover;margin-bottom:32px}
+.admin-chart{margin-top:22px}
+.admin-chart-body{padding:22px 24px}
+.admin-chart-body p{color:#718476;font-size:12px;margin:0 0 20px}
+.admin-chart-row{display:grid;grid-template-columns:110px minmax(0,1fr) 40px;gap:14px;align-items:center;margin:15px 0;font-size:13px}
+.admin-chart-row strong{text-align:right}
+.admin-chart-track{height:12px;border-radius:8px;background:#edf4ef;overflow:hidden}
+.admin-chart-track>span{display:block;height:100%;border-radius:8px;background:#168653}
+@media(max-width:600px){.service-cover{height:220px}.admin-chart-row{grid-template-columns:80px minmax(0,1fr) 30px;gap:8px;font-size:12px}}
+
+.contact-form{margin-top:42px}
+.contact-form h2{margin-bottom:8px}
+.contact-form>p{color:#718475}
+.contact-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.contact-form label{display:block;color:#264a37;font-size:13px;font-weight:700;margin:0 0 7px}
+.contact-form input,.contact-form textarea{width:100%;border:1px solid #d5e4d9;border-radius:7px;padding:12px;font:inherit;color:var(--ink);background:#fff}
+.contact-form textarea{resize:vertical}
+.contact-form-grid+div{margin-top:18px}
+.contact-form .site-btn{margin-top:16px}
+.contact-form .site-btn:disabled{opacity:.6}
+.contact-form .contact-form-error{color:#a5382c;margin:12px 0 0}
+.contact-form .contact-form-success{color:#157a4e;margin:12px 0 0}
+.submission{padding:22px 24px;border-bottom:1px solid #e7eee8}
+.submission-heading{display:flex;justify-content:space-between;align-items:start;gap:16px}
+.submission-heading h3{font-size:16px;font-weight:800;margin:0 0 7px;overflow-wrap:anywhere}
+.submission-heading span,.submission-heading time{font-size:12px;color:#718476;overflow-wrap:anywhere}
+.submission-heading a{color:#13794b}
+.submission p{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7;margin:16px 0}
+.submission-pagination{display:flex;align-items:center;gap:15px;padding:20px 24px;font-size:13px}
+@media(max-width:600px){.contact-form-grid{grid-template-columns:1fr}.submission-heading{flex-direction:column;gap:6px}}

@@ -62,6 +62,17 @@ model Media {
   altText     String?  @db.VarChar(255)
   createdAt   DateTime @default(now())
 }
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String   @db.VarChar(190)
+  email     String   @db.VarChar(190)
+  phone     String?  @db.VarChar(40)
+  subject   String   @db.VarChar(190)
+  message   String   @db.Text
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
 model SiteSettings {
   id             Int      @id @default(1)
   brandName      String   @default("Monoline") @db.VarChar(190)

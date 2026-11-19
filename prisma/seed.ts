@@ -2,6 +2,7 @@ import "dotenv/config";
 
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { servicePages } from "../scripts/content.mjs";
 
 const prisma = new PrismaClient();
 
@@ -267,6 +268,22 @@ async function main() {
   });
 
   console.log("Contact page initialized.");
+
+  for (const [index, page] of servicePages.entries()) {
+    await prisma.page.upsert({
+      where: { slug: page.slug },
+      update: {},
+      create: {
+        ...page,
+        coverImage: index % 2 === 0 ? "/images/hero-accountants.png" : "/images/financial-advisor.png",
+        status: "published",
+        showInNav: false,
+        seoTitle: page.title + " | Monoline",
+        seoDesc: page.excerpt,
+      },
+    });
+  }
+  console.log("Service detail pages initialized.");
 
   // ==========================================
   // 6. SAMPLE BLOG POST

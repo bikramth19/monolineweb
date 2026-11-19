@@ -4,15 +4,16 @@
   "private": true,
   "scripts": {
     "predev": "prisma generate --schema prisma/neon/schema.prisma",
-    "dev": "next dev -p 3000",
-    "build": "prisma generate --schema prisma/neon/schema.prisma && next build",
+    "dev": "next dev --webpack -p 3000",
+    "build": "prisma generate --schema prisma/neon/schema.prisma && next build --webpack",
     "start": "next start -p 3000",
     "typecheck": "tsc --noEmit",
     "db:generate": "prisma generate --schema prisma/neon/schema.prisma",
     "db:push": "prisma db push --schema prisma/neon/schema.prisma",
     "db:seed": "npm run db:generate && tsx prisma/seed.ts",
     "db:studio": "prisma studio --schema prisma/neon/schema.prisma",
-    "content:update": "npm run db:generate && node scripts/update-content.mjs"
+    "content:update": "npm run db:generate && node scripts/update-content.mjs",
+    "services:seed": "npm run db:generate && node scripts/seed-services.mjs"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^11.0.0",
@@ -23,7 +24,7 @@
     "@vercel/blob": "^2.9.0",
     "bcryptjs": "^3.0.2",
     "bootstrap": "^5.3.8",
-    "ckeditor5": "^47.0.0",
+    "ckeditor5": "47.6.2",
     "dotenv": "^18.0.10",
     "jose": "^6.1.0",
     "next": "^16.4.6",

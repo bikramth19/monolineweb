@@ -7,6 +7,7 @@ import { prisma } from '@/lib/prisma';
 import { cleanHtml } from '@/lib/sanitize';
 import { siteSettings } from '@/lib/settings';
 import { services } from '@/lib/services';
+import { ContactForm } from '@/components/site/ContactForm';
 
 export const dynamic = 'force-dynamic';
 type Context = { params: Promise<{ slug: string }> };
@@ -70,7 +71,11 @@ export default async function ContentPage({ params }: Context) {
       ) : (
         <section className="site-section">
           <div className={`site-container content-layout${isAbout ? ' about-content-layout' : ''}`}>
-            <article className="rich-content" dangerouslySetInnerHTML={{ __html: cleanHtml(page.content) }} />
+            <article className="rich-content">
+              {currentService && <img className="service-cover" src={page.coverImage || (services.findIndex(service => service.slug === slug) % 2 === 0 ? '/images/hero-accountants.png' : '/images/financial-advisor.png')} alt={`Illustrative image for ${page.title}`} />}
+              <div dangerouslySetInnerHTML={{ __html: cleanHtml(page.content) }} />
+              {isContact && <ContactForm />}
+            </article>
 
             {isAbout && (
               <aside className="content-support-panel about-support-panel">
