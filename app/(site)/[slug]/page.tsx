@@ -8,6 +8,7 @@ import { cleanHtml } from '@/lib/sanitize';
 import { siteSettings } from '@/lib/settings';
 import { services } from '@/lib/services';
 import { ContactForm } from '@/components/site/ContactForm';
+import { splitAboutContent } from '@/lib/about-content';
 
 export const dynamic = 'force-dynamic';
 type Context = { params: Promise<{ slug: string }> };
@@ -35,6 +36,7 @@ export default async function ContentPage({ params }: Context) {
   const isServices = slug === 'services';
   const isAbout = slug === 'about-us';
   const currentService = services.find(service => service.slug === slug);
+  const aboutContent = isAbout ? splitAboutContent(page.content) : null;
 
   return (
     <>
@@ -84,7 +86,7 @@ export default async function ContentPage({ params }: Context) {
           <div className={`site-container content-layout${isAbout ? ' about-content-layout' : ''}`}>
             <article className="rich-content">
               {currentService && <img className="service-cover" src={page.coverImage || (services.findIndex(service => service.slug === slug) % 2 === 0 ? '/images/hero-accountants.png' : '/images/financial-advisor.png')} alt={`Illustrative image for ${page.title}`} />}
-              <div dangerouslySetInnerHTML={{ __html: cleanHtml(page.content) }} />
+              <div dangerouslySetInnerHTML={{ __html: aboutContent ? aboutContent.remaining : cleanHtml(page.content) }} />
               {isContact && <ContactForm />}
             </article>
 
@@ -124,6 +126,8 @@ export default async function ContentPage({ params }: Context) {
           </div>
         </section>
       )}
+
+      {aboutContent && <section className="about-cards-section"><div className="site-container"><div className="about-cards-grid">{aboutContent.cards.map(card => <article key={card.title} className="about-card rich-content" dangerouslySetInnerHTML={{ __html: card.html }} />)}</div></div></section>}
 
       {!isContact && !isServices && <section className="inner-bottom-cta"><div className="site-container d-flex flex-wrap align-items-center justify-content-between gap-3"><h2>{currentService ? 'Ready to talk about this service?' : 'Looking for dependable accounting support?'}</h2><Link href="/contact" className="site-btn">Talk to Monoline →</Link></div></section>}
     </>

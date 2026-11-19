@@ -7,12 +7,13 @@
   --muted: #708276;
   --border: #e1eae3;
   --admin-bg: #f4f7f6;
+  --bs-body-font-family: "Roboto Variable", sans-serif;
 }
 * {
   box-sizing: border-box;
 }
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Roboto Variable", sans-serif;
   font-size: 14px;
   color: var(--ink);
   background: #fff;
@@ -53,7 +54,6 @@ img {
   width: 106px;
   height: 84px;
   object-fit: contain;
-  background: #e3e3e3;
 }
 .site-desktop-nav {
   display: flex;
@@ -595,6 +595,9 @@ img {
 }
 .rich-content h2 {
   font-size: 30px;
+  border-bottom: 1px solid #96e2c1;
+  padding: 0 0 10px;
+  margin-top: 0;
 }
 .rich-content h3 {
   font-size: 23px;
@@ -1355,7 +1358,8 @@ img {
 .service-card,
 .step-card,
 .industry,
-.blog-card {
+.blog-card,
+.about-card {
   position: relative;
   isolation: isolate;
   transition:
@@ -1415,7 +1419,8 @@ img {
 }
 .step-card:hover,
 .industry:hover,
-.blog-card:hover {
+.blog-card:hover,
+.about-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 38px #0d46201b;
   border-color: #b9dabe;
@@ -1535,7 +1540,7 @@ img {
   background: #f3f8f4;
   border: 1px solid #dceade;
   border-radius: 12px;
-  padding: 26px;
+  padding: 0px;
   position: relative;
 }
 .content-support-panel h3 {
@@ -1715,6 +1720,7 @@ img {
   .step-card,
   .industry,
   .blog-card,
+  .about-card,
   .service-card .icon-chip,
   .blog-card img,
   .card-link svg {
@@ -1726,6 +1732,47 @@ img {
   .has-scroll-reveal .reveal-item:not(.is-visible) {
     opacity: 1;
     transform: none;
+  }
+}
+
+.about-cards-section {
+  padding: 0 0 95px;
+}
+.about-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.about-card {
+  background: #f3f8f4;
+  border: 1px solid #dceade;
+  border-radius: 12px;
+  padding: 28px;
+}
+.about-card h2,
+.about-card h3 {
+  margin-top: 0;
+  font-size: 23px;
+}
+.about-card h4 {
+  font-size: 16px;
+}
+.about-card p,
+.about-card li {
+  font-size: 16px;
+}
+.ck.ck-reset,
+.ck.ck-reset_all {
+  --ck-font-face: "Roboto Variable", sans-serif;
+}
+@media (max-width: 900px) {
+  .about-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .about-cards-section {
+    padding-bottom: 65px;
   }
 }
 
