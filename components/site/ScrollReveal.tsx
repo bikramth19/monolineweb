@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 export function ScrollReveal() {
   const pathname = usePathname();
   useEffect(() => {
-    const selector = '.service-card, .step-card, .industry, .blog-card';
+    const selector = '.service-card, .step-card, .industry, .blog-card, .about-card';
     const cards = Array.from(document.querySelectorAll<HTMLElement>(selector));
     if (!cards.length || !('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
