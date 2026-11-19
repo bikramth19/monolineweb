@@ -50,7 +50,18 @@ export default async function ContentPage({ params }: Context) {
       {isServices ? (
         <section className="site-section service-catalog-section">
           <div className="site-container">
-            <article className="rich-content catalog-intro" dangerouslySetInnerHTML={{ __html: cleanHtml(page.content) }} />
+            <div className="catalog-intro">
+              <article className="rich-content" dangerouslySetInnerHTML={{ __html: cleanHtml(page.content) }} />
+              <aside className="content-support-panel catalog-support-panel">
+                <img src={page.coverImage || '/images/financial-advisor.png'} alt="" />
+                <div className="support-panel-body">
+                  <span className="section-kicker">SUPPORT FOR YOUR BUSINESS</span>
+                  <h3>Financial clarity at every step.</h3>
+                  <p>From organised accounts to compliance and planning, explore practical support tailored to your business.</p>
+                  <ul><li><FontAwesomeIcon icon={faCheckCircle} /> Accounting and bookkeeping</li><li><FontAwesomeIcon icon={faCheckCircle} /> Tax and compliance support</li><li><FontAwesomeIcon icon={faCheckCircle} /> Reporting and advisory</li></ul>
+                </div>
+              </aside>
+            </div>
             <div className="service-catalog-grid">
               {services.map((service, index) => (
                 <Link className="service-card catalog-card" href={`/${service.slug}`} key={service.slug}>

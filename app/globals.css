@@ -1445,8 +1445,20 @@ img {
 
 /* Full-width Services catalog and individual service article pages */
 .catalog-intro {
-  max-width: 930px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: start;
+  gap: 48px;
   margin: 0 0 40px;
+}
+.catalog-support-panel {
+  padding: 0;
+}
+.catalog-support-panel > img {
+  display: block;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
 }
 .service-catalog-grid {
   display: grid;
@@ -1664,6 +1676,10 @@ img {
   }
 }
 @media (max-width: 900px) {
+  .catalog-intro {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
   .content-layout:has(.content-support-panel) {
     grid-template-columns: 1fr;
     gap: 34px;
@@ -1689,7 +1705,8 @@ img {
   .content-support-panel {
     padding: 20px;
   }
-  .about-support-panel {
+  .about-support-panel,
+  .catalog-support-panel {
     padding: 0;
   }
 }
